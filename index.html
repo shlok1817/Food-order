@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="FeastFlow - Order delicious food from the best restaurants near you. Fast delivery, great prices.">
+<title>FeastFlow — Delicious Food, Delivered</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍕</text></svg>">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo" onclick="navigateTo('home')"><span>🍕</span> FeastFlow</div>
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search restaurants, dishes..." autocomplete="off">
+    <div class="search-dropdown" id="search-dropdown"></div>
+  </div>
+  <div class="nav-links" id="nav-links">
+    <span class="nav-link active" data-page="home" onclick="navigateTo('home')">Home</span>
+    <span class="nav-link" data-page="restaurants" onclick="navigateTo('restaurants')">Restaurants</span>
+    <span class="nav-link" data-page="orders" onclick="navigateTo('orders')">My Orders</span>
+    <span class="nav-link" data-page="profile" onclick="navigateTo('profile')">Profile</span>
+  </div>
+  <div class="nav-right">
+    <button id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    <button class="cart-btn" onclick="Cart.open()" title="Cart">🛒<span id="cart-badge">0</span></button>
+    <button id="nav-login-btn" onclick="openAuthModal()">Sign In</button>
+    <div id="nav-user-menu" onclick="navigateTo('profile')">
+      <div id="nav-user-avatar">A</div>
+      <span id="nav-user-name">User</span>
+    </div>
+    <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- HOME PAGE -->
+<section id="page-home" class="page-section active">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Delicious Food, Delivered to Your Door</h1>
+      <p>Discover amazing restaurants and order your favorite meals with just a few clicks.</p>
+      <button class="btn btn-primary" onclick="navigateTo('restaurants')">🍽️ Explore Restaurants</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header"><h2>🍽️ Browse by Cuisine</h2><p>What are you craving today?</p></div>
+    <div class="categories-grid" id="categories-grid"></div>
+  </div>
+  <div class="section">
+    <div class="section-header"><h2>⭐ Featured Restaurants</h2><p>Top-rated spots picked just for you</p></div>
+    <div class="restaurant-grid" id="featured-restaurants"></div>
+  </div>
+  <div class="section">
+    <div class="section-header"><h2>🔥 Popular Right Now</h2><p>Trending dishes everyone is ordering</p></div>
+    <div class="popular-grid" id="popular-dishes"></div>
+  </div>
+  <div class="section">
+    <div class="section-header"><h2>💬 What Our Foodies Say</h2><p>Real reviews from real customers</p></div>
+    <div class="testimonials-grid" id="testimonials-grid"></div>
+  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-col"><h4>🍕 FeastFlow</h4><p>Order from the best local restaurants with fast delivery.</p></div>
+      <div class="footer-col"><h4>Quick Links</h4><a href="#home">Home</a><a href="#restaurants">Restaurants</a><a href="#orders">My Orders</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="#">Help Center</a><a href="#">Contact Us</a><a href="#">FAQs</a></div>
+      <div class="footer-col"><h4>Contact</h4><p>📧 hello@feastflow.com</p><p>📞 (555) 123-4567</p><p>📍 123 Food Street</p></div>
+    </div>
+    <div class="footer-bottom">© 2026 FeastFlow. All rights reserved. Made with ❤️ and 🍕</div>
+  </footer>
+</section>
+
+<!-- RESTAURANTS PAGE -->
+<section id="page-restaurants" class="page-section">
+  <div class="section" style="margin-top:60px">
+    <div class="section-header"><h2>All Restaurants</h2><p>Find your next favorite meal</p></div>
+    <div class="filters-bar">
+      <button class="filter-btn active" data-cuisine="all">All</button>
+      <button class="filter-btn" data-cuisine="pizza">🍕 Pizza</button>
+      <button class="filter-btn" data-cuisine="sushi">🍣 Sushi</button>
+      <button class="filter-btn" data-cuisine="burger">🍔 Burgers</button>
+      <button class="filter-btn" data-cuisine="indian">🍛 Indian</button>
+      <button class="filter-btn" data-cuisine="chinese">🥡 Chinese</button>
+      <button class="filter-btn" data-cuisine="mexican">🌮 Mexican</button>
+      <button class="filter-btn" data-cuisine="healthy">🥗 Healthy</button>
+      <button class="filter-btn" data-cuisine="dessert">🍰 Desserts</button>
+      <select id="sort-select" onchange="renderRestaurantsPage()">
+        <option value="rating">Sort by Rating</option>
+        <option value="deliveryTime">Fastest Delivery</option>
+        <option value="deliveryFee">Lowest Delivery Fee</option>
+        <option value="name">Name A-Z</option>
+      </select>
+    </div>
+    <div class="restaurants-grid" id="restaurants-grid"></div>
+  </div>
+</section>
+
+<!-- RESTAURANT DETAIL PAGE -->
+<section id="page-restaurant" class="page-section">
+  <div id="restaurant-detail-content"></div>
+</section>
+
+<!-- CHECKOUT PAGE -->
+<section id="page-checkout" class="page-section">
+  <div id="checkout-content"></div>
+</section>
+
+<!-- CONFIRMATION PAGE -->
+<section id="page-confirmation" class="page-section">
+  <div id="confirmation-content"></div>
+</section>
+
+<!-- TRACKING PAGE -->
+<section id="page-tracking" class="page-section">
+  <div id="tracking-content"></div>
+</section>
+
+<!-- ORDERS PAGE -->
+<section id="page-orders" class="page-section">
+  <div class="section" style="margin-top:60px">
+    <div class="section-header"><h2>📋 My Orders</h2><p>Track and view your order history</p></div>
+    <div id="order-history-list"></div>
+  </div>
+</section>
+
+<!-- PROFILE PAGE -->
+<section id="page-profile" class="page-section">
+  <div id="profile-content"></div>
+</section>
+
+<!-- CART PANEL -->
+<div id="cart-overlay"></div>
+<div id="cart-panel">
+  <div class="cart-header"><h2>🛒 Your Cart</h2><button class="cart-close" onclick="Cart.close()">✕</button></div>
+  <div id="cart-items-container"></div>
+  <div id="cart-summary">
+    <div class="promo-row">
+      <input type="text" id="promo-input" placeholder="Promo code (try WELCOME20)">
+      <button id="apply-promo-btn">Apply</button>
+    </div>
+    <div class="price-row"><span>Subtotal</span><span id="cart-subtotal">$0.00</span></div>
+    <div class="price-row"><span>Delivery</span><span id="cart-delivery">$0.00</span></div>
+    <div class="price-row"><span>Tax (8%)</span><span id="cart-tax">$0.00</span></div>
+    <div class="price-row discount" id="cart-discount-row" style="display:none"><span>Discount</span><span id="cart-discount">-$0.00</span></div>
+    <div class="price-row total"><span>Total</span><span id="cart-total">$0.00</span></div>
+    <button class="btn btn-primary btn-full cart-checkout-btn" onclick="Cart.close(); navigateTo('checkout')">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- DISH MODAL -->
+<div class="modal-overlay" id="dish-modal" onclick="if(event.target===this)closeDishModal()">
+  <div class="modal-content" id="dish-modal-content"></div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay auth-modal" id="auth-modal" onclick="if(event.target===this)closeAuthModal()">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeAuthModal()">✕</button>
+    <div class="auth-tabs">
+      <button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Log In</button>
+      <button class="auth-tab" data-tab="signup" onclick="switchAuthTab('signup')">Sign Up</button>
+    </div>
+    <div id="login-form-container">
+      <form onsubmit="handleLogin(event)">
+        <div class="auth-error" id="login-error"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="login-email" required placeholder="you@example.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="login-password" required placeholder="Enter password"></div>
+        <button type="submit" class="btn btn-primary btn-full">Log In</button>
+      </form>
+    </div>
+    <div id="signup-form-container" style="display:none">
+      <form onsubmit="handleSignup(event)">
+        <div class="auth-error" id="signup-error"></div>
+        <div class="form-group"><label>Full Name</label><input type="text" id="signup-name" required placeholder="John Doe"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="signup-email" required placeholder="you@example.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="signup-password" required placeholder="Min 6 characters"></div>
+        <div class="form-group"><label>Phone (optional)</label><input type="tel" id="signup-phone" placeholder="(555) 123-4567"></div>
+        <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- SCRIPTS -->
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/search.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
