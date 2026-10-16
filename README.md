@@ -48,11 +48,9 @@ The entire app runs in the browser with **zero backend dependencies**. All user 
 
 ## 🚀 Live Demo
 
-> Deploy this project to **GitHub Pages**, **Netlify**, **Vercel**, or any static hosting service and access it instantly — no build step required.
+> **[🔗 View Live App →  https://food-order-seven-rho.vercel.app](https://food-order-seven-rho.vercel.app)**
 
-```
-https://<your-username>.github.io/Food-order/
-```
+Deployed on **Vercel** with automatic GitHub integration — every push to `main` triggers a new deployment.
 
 ---
 
